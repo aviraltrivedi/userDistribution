@@ -1,5 +1,6 @@
 package com.demoapp.demo.controller;
 
+import com.demoapp.demo.ApplicationConstants;
 import com.demoapp.demo.model.User;
 import com.demoapp.demo.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,13 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/patient")
+@RequestMapping(ApplicationConstants.API_PATIENT_ROOT)
 public class PatientController {
 
     @Autowired
     private PatientService patientService;
 
-    @GetMapping("/listAllDoctors")
+    @GetMapping("")
     public List<User> listOfDoctors(){
         return patientService.getListDoctors();
     }

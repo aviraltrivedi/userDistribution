@@ -27,4 +27,9 @@ public interface ApplicationConstants {
     String API_AUTH_ROOT = "/api/auth";
     String API_SIGNIN = "/signin";
     String API_SIGNUP = "/signup";
+
+    String API_PATIENT_ROOT = "/api/patient";
+    String API_GET_DOCTORS = "/getDoctorss";
+
+
 }
