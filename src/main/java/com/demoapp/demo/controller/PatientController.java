@@ -19,7 +19,7 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    @GetMapping("")
+    @GetMapping(ApplicationConstants.API_GET_DOCTORS)
     public List<User> listOfDoctors(){
         return patientService.getListDoctors();
     }
