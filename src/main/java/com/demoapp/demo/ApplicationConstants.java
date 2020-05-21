@@ -21,8 +21,7 @@ public interface ApplicationConstants {
             "/swagger-ui.html",
             "/webjars/**",
             "/h2-console/**",
-            "/api/doctor/getMedicalShops",
-            "/api/doctor/getPathologyLabs",
+            "/api/doctor/**",
             "/api/patient/**"
             // other public endpoints of your API may be appended to this array
     };
@@ -48,5 +47,5 @@ public interface ApplicationConstants {
     String CONST_PATHOLOGY = "&keyword=pathology+lab";
 
     String API_PATIENT_ROOT = "/api/patient";
-    String API_GET_DOCTORS = "/getDoctorss";
+    String API_GET_DOCTORS = "/getDoctors";
 }
