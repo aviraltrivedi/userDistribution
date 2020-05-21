@@ -29,16 +29,18 @@ public class User {
     @Size(max = 120)
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "user_roles",
-    joinColumns = @JoinColumn(name="user_id"),
-    inverseJoinColumns = @JoinColumn(name="role_id"))
-    private UserType userType;
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+//    @JoinTable(name = "user_roles",
+//    joinColumns = @JoinColumn(name="user_id"),
+//    inverseJoinColumns = @JoinColumn(name="role_id"))
+    @NotBlank
+    @Enumerated(EnumType.STRING)
+    private UserTypes userType;
 
     public User() {
     }
 
-    public User(String username, String email, String password, UserType userType) {
+    public User(String username, String email, String password, UserTypes userType) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -77,11 +79,11 @@ public class User {
         this.password = password;
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(UserTypes userType) {
         this.userType = userType;
     }
 
-    public UserType getUserType() {
+    public UserTypes getUserType() {
         return userType;
     }
 }

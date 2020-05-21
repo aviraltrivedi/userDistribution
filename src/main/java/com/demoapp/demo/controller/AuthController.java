@@ -3,6 +3,7 @@ package com.demoapp.demo.controller;
 import com.demoapp.demo.ApplicationConstants;
 import com.demoapp.demo.model.User;
 import com.demoapp.demo.model.UserType;
+import com.demoapp.demo.model.UserTypes;
 import com.demoapp.demo.payload.request.LoginRequest;
 import com.demoapp.demo.payload.request.SignupRequest;
 import com.demoapp.demo.payload.respomse.JwtResponse;
@@ -69,7 +70,7 @@ public class AuthController {
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                roles));
+                userDetails.getUserTypes()));
     }
 
     @RequestMapping(value=ApplicationConstants.API_SIGNUP, method = RequestMethod.POST,
@@ -88,7 +89,7 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        UserType userType = signUpRequest.getUserType();
+        UserTypes userType = signUpRequest.getUserType();
 
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),

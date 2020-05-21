@@ -2,6 +2,7 @@ package com.demoapp.demo.security.services;
 
 import com.demoapp.demo.model.User;
 import com.demoapp.demo.model.UserType;
+import com.demoapp.demo.model.UserTypes;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,7 +24,7 @@ public class UserDetailsImpl implements UserDetails
 
     private String email;
 
-    private UserType userType = new UserType();
+    private UserTypes userTypes;
 
     private String role;
 
@@ -33,12 +34,13 @@ public class UserDetailsImpl implements UserDetails
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(Long id, String username, String email, String password,
-                           Collection<? extends GrantedAuthority> authorities, String role) {
+                           Collection<? extends GrantedAuthority> authorities, UserTypes userTypes) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.userTypes = userTypes;
     }
 
     public static UserDetailsImpl build(User user) {
@@ -51,7 +53,7 @@ public class UserDetailsImpl implements UserDetails
                 user.getEmail(),
                 user.getPassword(),
                 authorities,
-                user.getUserType().getUserTypes().name());
+                user.getUserType());
     }
 
     @Override
@@ -96,6 +98,14 @@ public class UserDetailsImpl implements UserDetails
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public UserTypes getUserTypes() {
+        return userTypes;
+    }
+
+    public void setUserTypes(UserTypes userTypes) {
+        this.userTypes = userTypes;
     }
 
     @Override

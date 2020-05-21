@@ -1,5 +1,7 @@
 package com.demoapp.demo.payload.respomse;
 
+import com.demoapp.demo.model.UserTypes;
+
 import java.util.List;
 
 public class JwtResponse {
@@ -9,13 +11,14 @@ public class JwtResponse {
     private String username;
     private String email;
     private List<String> roles;
+    private UserTypes userTypes;
 
-    public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
+    public JwtResponse(String accessToken, Long id, String username, String email, UserTypes userTypes) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
         this.email = email;
-        this.roles = roles;
+        this.userTypes = userTypes;
     }
 
     public String getAccessToken() {
