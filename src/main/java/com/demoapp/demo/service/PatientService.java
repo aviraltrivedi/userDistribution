@@ -16,9 +16,10 @@ public class PatientService {
 
     public List<User> getListDoctors(){
         List<User> doctors = userRepository.findAll();
-        for(User doctor : doctors){
-            if(doctor.getUserType().getUserTypes().equals(UserTypes.PATIENT)){
-                doctors.remove(doctor);
+
+        for(int i = 0; i < doctors.size(); i++){
+            if(doctors.get(i).getUserType().getUserTypes().equals(UserTypes.PATIENT)){
+                doctors.remove(i);
             }
         }
 
