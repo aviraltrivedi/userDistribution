@@ -1,6 +1,7 @@
 package com.demoapp.demo.payload.request;
 
 import com.demoapp.demo.model.UserType;
+import com.demoapp.demo.model.UserTypes;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +18,7 @@ public class SignupRequest {
     @Email
     private String email;
 
-    private UserType userType;
+    private UserTypes userType;
 
     @NotBlank
     @Size(min = 6, max = 40)
@@ -47,11 +48,11 @@ public class SignupRequest {
         this.password = password;
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(UserTypes userType) {
         this.userType = userType;
     }
 
-    public UserType getUserType() {
+    public UserTypes getUserType() {
         return userType;
     }
 }
