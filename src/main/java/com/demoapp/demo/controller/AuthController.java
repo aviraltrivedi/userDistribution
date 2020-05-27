@@ -13,6 +13,7 @@ import com.demoapp.demo.repository.UserTypeRepository;
 import com.demoapp.demo.security.jwt.JwtUtils;
 import com.demoapp.demo.security.services.UserDetailsImpl;
 
+import com.demoapp.demo.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -52,6 +53,9 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+
     @PostMapping(ApplicationConstants.API_SIGNIN)
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -61,7 +65,7 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername((String) authentication.getPrincipal());
 
         List<String> roles = new ArrayList<>();
         String userType = userDetails.getAuthorities().toString();

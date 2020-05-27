@@ -3,6 +3,7 @@ package com.demoapp.demo.security;
 import com.demoapp.demo.ApplicationConstants;
 import com.demoapp.demo.security.jwt.AuthEntryPointJwt;
 import com.demoapp.demo.security.jwt.AuthTokenFilter;
+import com.demoapp.demo.security.jwt.CustomAuthenticationProvider;
 import com.demoapp.demo.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,8 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-//    @Autowired
-//    private AuthEntryPointJwt authEntryPointJwt;
+    @Autowired
+    private AuthEntryPointJwt authEntryPointJwt;
 
 
     @Bean
@@ -37,9 +38,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new AuthTokenFilter();
     }
 
+    @Autowired
+    private CustomAuthenticationProvider authProvider;
+
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.authenticationProvider(authProvider);
     }
 
     @Bean
@@ -67,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/**").denyAll()
             .anyRequest().authenticated();
 
-        http.oauth2Login();
+        http.httpBasic();
 
         http.csrf().disable();
         http.headers().frameOptions().disable();

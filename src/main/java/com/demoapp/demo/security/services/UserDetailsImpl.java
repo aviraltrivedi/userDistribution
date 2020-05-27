@@ -43,6 +43,9 @@ public class UserDetailsImpl implements UserDetails
         this.userTypes = userTypes;
     }
 
+    public UserDetailsImpl() {
+    }
+
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getUserType().toString());
